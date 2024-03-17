@@ -1,0 +1,21 @@
+ public List<Employee> searchEmployee(){
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+
+            String hql = "SELECT e.id, e.name, e.position , e.department, e.hire_date, e.salary FROM Employee e order by e.id";
+
+            org.hibernate.query.Query<Employee> query = session.createQuery(hql);
+
+            List<Employee> employees = query.list();
+            System.out.println(employees);
+
+            return employees;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        } finally {
+            //HibernateUtil.close();
+        }
+    }
